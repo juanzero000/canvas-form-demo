@@ -43,6 +43,38 @@ function prepareCanvas() {
     $('#canvas').mouseleave(function (e) {
         paint = false;
     });
+
+    // Add touch event listeners to canvas element
+    canvas.addEventListener("touchstart", function (e) {
+        // Mouse down location
+        var canvasPos = $(this).offset();
+
+        var mouseX = (e.changedTouches ? e.changedTouches[0].pageX : e.pageX) - canvasPos.left,
+            mouseY = (e.changedTouches ? e.changedTouches[0].pageY : e.pageY) - canvasPos.top;
+
+        paint = true;
+        addClick(mouseX, mouseY, false);
+        redraw();
+    }, false);
+    canvas.addEventListener("touchmove", function (e) {
+        var canvasPos = $(this).offset();
+
+        var mouseX = (e.changedTouches ? e.changedTouches[0].pageX : e.pageX) - canvasPos.left,
+            mouseY = (e.changedTouches ? e.changedTouches[0].pageY : e.pageY) - canvasPos.top;
+
+        if (paint) {
+            addClick(mouseX, mouseY, true);
+            redraw();
+        }
+        e.preventDefault()
+    }, false);
+    canvas.addEventListener("touchend", function (e) {
+        paint = false;
+        redraw();
+    }, false);
+    canvas.addEventListener("touchcancel", function (e) {
+        paint = false;
+    }, false);
 }
 
 function addClick(x, y, dragging) {
