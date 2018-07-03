@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>CanvasFormDemo</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+    <style>
+        canvas {
+            border: 1px solid #ced4da;
+            border-radius: .25rem;
+            /* display: block;
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 1rem; */
+        }
+
+        .divCanvas{
+            min-width: 380px;
+            max-width: 380px;
+            margin: auto;
+        }
+
+        .divCanvas button{
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>CanvasFormDemo</h1>
+    <div class="row mt-3">
+        <div class="col">
+            <form method="post" th:action="@{/save}" th:object="${asegurado}" onsubmit="prepareSignImageForUpload();" enctype="multipart/form-data">
+                <div class="form-group row">
+                    <div class="col-12 col-md-6 mb-3">
+                        <label for="nombre">Nombre</label>
+                        <input type="text" name="nombre" id="nombre" class="form-control" placeholder="Nombre"
+                               th-field="${asegurado.nombre}">
+                    </div>
+                    <div class="col-12 col-md-6 mb-3">
+                        <label for="apellido">Apellido</label>
+                        <input type="text" name="apellido" id="apellido" class="form-control" placeholder="Apellido"
+                               th-field="${asegurado.apellido}">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-12 col-md-6 mb-3">
+                        <label for="tipoDocumento">Tipo Documento</label>
+                        <select name="tipoDocumento" id="tipoDocumento" class="form-control">
+                            <option value="">Seleccione</option>
+                            <option th:each="dniTipo : ${dniTipoList}" th:value="${dniTipo.nombre}"
+                                    th:text="${dniTipo.nombre}"></option>
+                        </select>
+                    </div>
+                    <div class="col-12 col-md-6 mb-3">
+                        <label for="documento">Documento</label>
+                        <input type="text" name="documento" id="documento" class="form-control" placeholder="Documento"
+                               th-field="${asegurado.documento}">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col mb-3">
+                        <label for="numeroAfiliado">Número de Afiliado</label>
+                        <input type="text" name="numeroAfiliado" id="numeroAfiliado" class="form-control"
+                               placeholder="Número de Afiliado" th-field="${asegurado.numeroAfiliado}">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-12 col-md-6 mb-3">
+                        <label for="telefono">Teléfono</label>
+                        <input type="text" name="telefono" id="telefono" class="form-control" placeholder="Teléfono"
+                               th-field="${asegurado.telefono}">
+                    </div>
+                    <div class="col-12 col-md-6 mb-3">
+                        <label for="email">Email</label>
+                        <input type="text" name="email" id="email" class="form-control" placeholder="Email"
+                               th-field="${asegurado.email}">
+                    </div>
+                </div>
+
+                <div class="divCanvas row justify-content-center">
+                    <div class="col">
+                        <div class="row">
+                            <div class="col d-flex justify-content-center">
+                                <canvas id="canvas" width="300" height="175"></canvas>
+                                <!-- <img src="" alt="firma" id="firma" class="d-none"> -->
+                                <input type="hidden" name="firma" id="firma">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col d-flex justify-content-end">
+                                <button type="button" class="btn btn-link" onclick="clearCanvas();">limpiar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row justify-content-center">
+                    <div class="col-12 col-sm-9 col-md-4">
+                        <button class="btn btn-primary btn-block" type="submit">Enviar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+<script th:src="@{/webjars/popper.js/popper.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/drawingCanvas.js}"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        prepareCanvas();
+    });
+</script>
+</body>
+</html>
