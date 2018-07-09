@@ -87,7 +87,7 @@ public class MainController {
             params.put("pEmail", asegurado.getEmail());
             params.put("pFirma", firma);
 
-            JasperReport jasperReport = (JasperReport) JRLoader.loadObject(new ClassPathResource("/static/report/CanvasDemoReport.jasper").getFile());
+            JasperReport jasperReport = (JasperReport) JRLoader.loadObject(new ClassPathResource("/static/report/CanvasDemoReport.jasper").getInputStream());
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, params, new JREmptyDataSource(1));
             byte[] pdfReport = JasperExportManager.exportReportToPdf(jasperPrint);
 
