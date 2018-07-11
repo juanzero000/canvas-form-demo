@@ -5,26 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <title>CanvasFormDemo</title>
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
-    <style>
-        canvas {
-            border: 1px solid #ced4da;
-            border-radius: .25rem;
-            /* display: block;
-            margin-left: auto;
-            margin-right: auto;
-            margin-bottom: 1rem; */
-        }
-
-        /*.divCanvas{*/
-        /*min-width: 380px;*/
-        /*max-width: 380px;*/
-        /*margin: auto;*/
-        /*}*/
-
-        .divCanvas button{
-            margin-right: 10px;
-        }
-    </style>
 </head>
 <body>
 
@@ -80,7 +60,7 @@
                     </div>
                 </div>
 
-                <div class="divCanvas row justify-content-center">
+                <div class="row justify-content-center">
                     <div class="col-auto">
                         <div class="row">
                             <div class="col-auto">
@@ -89,14 +69,13 @@
                         </div>
                         <div class="row">
                             <div class="col-auto d-flex justify-content-center">
-                                <canvas id="canvas" width="300" height="175"></canvas>
-                                <!-- <img src="" alt="firma" id="firma" class="d-none"> -->
+                                <canvas id="canvas" width="300" height="175" class="border border-secondary rounded"></canvas>
                                 <input type="hidden" name="firma" id="firma">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col d-flex justify-content-end">
-                                <button type="button" class="btn btn-link" onclick="clearCanvas();">limpiar</button>
+                                <button type="button" class="btn btn-link px-0" onclick="clearCanvas();">limpiar</button>
                             </div>
                         </div>
                     </div>
