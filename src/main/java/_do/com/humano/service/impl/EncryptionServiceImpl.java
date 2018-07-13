@@ -50,7 +50,6 @@ public class EncryptionServiceImpl implements EncryptionService {
 
     private Cipher getCipher(String key, final int opmode) {
         try {
-            System.out.println("initVector: " + initVector);
             IvParameterSpec iv = new IvParameterSpec(initVector.getBytes(charset));
             SecretKeySpec secretKeySpec = new SecretKeySpec(key.getBytes(charset), algorithm);
 
