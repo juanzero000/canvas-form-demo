@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -43,7 +44,7 @@ public class MainController {
         return "index";
     }
 
-    @PostMapping("/save")
+    @PostMapping(value = "/save", produces = MediaType.APPLICATION_PDF_VALUE)
     public ResponseEntity<Resource> save(@Valid Asegurado asegurado, @RequestParam(name = "firma") String firma) {
         String encryptedData = encryptionService.encrypt(asegurado.getNombre() + " " + asegurado.getApellido(), asegurado.getDocumento());
 
